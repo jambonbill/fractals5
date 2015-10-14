@@ -1,0 +1,50 @@
+<html>
+<body>
+<script type="text/javascript">
+/*
+fractal tree canvas demo
+========================
+Original: http://jsfiddle.net/sebleedelisle/Uer2g/
+http://codepen.io/jsmorgan/pen/kGlDj
+*/
+var canvas = document.createElement('canvas'); 
+canvas.width = 200; 
+canvas.height = 200; 
+document.body.appendChild(canvas); 
+
+var ctx = canvas.getContext('2d'),
+    generation = 0,
+    branchLength = 10; 
+
+ctx.translate(100, 100); 
+branch(0);
+
+function branch(angle) { 
+    
+    generation++; 
+    
+    ctx.save(); 
+    
+    ctx.rotate(angle);  
+    ctx.scale(1.0,1.0);
+    
+    ctx.beginPath(); 
+    ctx.moveTo(0, 0); 
+    ctx.translate(0, -branchLength);
+    ctx.lineTo(0, 0);
+    ctx.lineWidth = 3;
+    if(Math.random() > .998){
+      ctx.stroke();
+    }
+   
+    if(generation<=15) {
+    
+        branch( (Math.PI/3));
+        branch(-Math.PI/3);
+    }
+    
+    ctx.restore();  
+    
+    generation--; 
+}
+</script>
